@@ -4,12 +4,25 @@ import Input from '../components/Input';
 import ReviewStatus from '../components/ReviewStatus';
 import Button from '../components/Button';
 import ReviewStat from '../components/ReviewStat';
+import getReviewResult from '../services/reviewService';
 
 const Home = () => {
     const [review, setReview] = useState("");
+    const [isLoading, setLoading] = useState(false);
+    const [result, setResult] = useState({
+        "overallPercent": 0,
+        "overallStatus": 1,
+        "posPersent": 0,
+        "netPersent": 0,
+        "negPersent": 0
+    });
 
-    const handleSubmit = () => {
-        console.log(review);
+    const handleSubmit = async () => {
+        setLoading(true);
+        const result = await getReviewResult(review);
+        setResult(result.data);
+        console.log(result);
+        setLoading(false);
     }
 
     return (
@@ -23,17 +36,17 @@ const Home = () => {
                     <Input value={review} onChange={(e) => setReview(e.target.value)} />
                     <h1 className="text-lg font-medium mt-4">Results: </h1>
                     <div className="mt-1 flex flex-col lg:flex-row items-start lg:items-center gap-1 lg:gap-6">
-                        <ReviewStat status={0} level={"90%"} />
-                        <ReviewStat status={1} level={"10%"} />
-                        <ReviewStat status={2} level={"20%"} />
+                        <ReviewStat status={0} level={result.negPersent + "%"} />
+                        <ReviewStat status={1} level={result.netPersent + "%"} />
+                        <ReviewStat status={2} level={result.posPersent + "%"} />
                     </div>
 
                     <h1 className="text-lg font-medium mt-4">Overall: </h1>
                     <div className="mt-1 flex items-center gap-6">
-                        <ReviewStatus status={0} />
+                        <ReviewStatus status={result.overallStatus} />
                     </div>
                     <div className="flex justify-center">
-                        <Button isLoading={false} onClick={handleSubmit} />
+                        <Button isLoading={isLoading} onClick={handleSubmit} />
                     </div>
                 </div>
             </div>
