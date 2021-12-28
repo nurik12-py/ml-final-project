@@ -9,7 +9,7 @@ const Dataset = () => {
         <div>
             <Navbar />
             <div className="p-3">
-                <h1 className="text-center text-2xl font-medium"><a className="text-blue-500" href="https://drive.google.com/file/d/1z_USrPx8bBnEM81n4Td5o0-3ZbufTHFf/view?usp=sharing">Reviews dataset</a> preview</h1>
+                <h1 className="text-center text-2xl font-medium"><a className="text-blue-500" href="https://drive.google.com/file/d/1z_USrPx8bBnEM81n4Td5o0-3ZbufTHFf/view?usp=sharing">Dataset</a> preview</h1>
                 <div class="mt-4 -mb-3"><div class="not-prose relative bg-grid-gray-100 bg-gray-50 rounded-xl overflow-hidden" ><div class="absolute inset-0 bg-gradient-to-b from-gray-50 opacity-60"></div><div class="relative rounded-xl overflow-auto">
                     <div class="shadow-sm overflow-hidden my-8">
                         <table class="border-collapse table-fixed w-full text-sm">

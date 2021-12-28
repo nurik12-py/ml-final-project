@@ -10,7 +10,6 @@ const Home = () => {
     const [review, setReview] = useState("");
     const [isLoading, setLoading] = useState(false);
     const [result, setResult] = useState({
-        "overallPercent": 0,
         "overallStatus": 1,
         "posPersent": 0,
         "netPersent": 0,
@@ -18,11 +17,17 @@ const Home = () => {
     });
 
     const handleSubmit = async () => {
-        setLoading(true);
-        const result = await getReviewResult(review);
-        setResult(result.data);
-        console.log(result);
-        setLoading(false);
+        if (review.length > 0) {
+            setLoading(true);
+            try {
+                const result = await getReviewResult(review);
+                setResult(result.data);
+                console.log(result);
+                setLoading(false);
+            } catch (ex) {
+                setLoading(true);
+            }
+        }
     }
 
     return (
